@@ -1,6 +1,8 @@
 const gulp = require('gulp');
 const HubRegistry = require('gulp-hub');
 const browserSync = require('browser-sync');
+const ghPages = require('gulp-gh-pages');
+
 
 const conf = require('./conf/gulp.conf');
 
@@ -27,3 +29,8 @@ function watch(done) {
   gulp.watch(conf.path.tmp('index.html'), reloadBrowserSync);
   done();
 }
+
+gulp.task('deploy', function () {
+  return gulp.src('./dist/**/*')
+    .pipe(ghPages());
+})
